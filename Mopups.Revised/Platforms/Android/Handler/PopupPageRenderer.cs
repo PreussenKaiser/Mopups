@@ -20,8 +20,9 @@ public class PopupPageRenderer : ContentViewGroup
     private readonly MopupGestureDetectorListener _gestureDetectorListener;
     private readonly GestureDetector _gestureDetector;
     private DateTime _downTime;
-    private Microsoft.Maui.Graphics.Point _downPosition;
+    private Point _downPosition;
     private bool _disposed;
+
     public PopupPageRenderer(Context context) : base(context)
     {
         _gestureDetectorListener = new MopupGestureDetectorListener();
@@ -53,7 +54,6 @@ public class PopupPageRenderer : ContentViewGroup
 
             Thickness systemPadding;
             var keyboardOffset = 0d;
-
 
             var visibleRect = new AndroidGraphics.Rect();
 

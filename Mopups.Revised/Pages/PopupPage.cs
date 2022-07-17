@@ -1,7 +1,5 @@
 ﻿using System.Windows.Input;
 
-using AsyncAwaitBestPractices;
-
 using Mopups.Animations;
 using Mopups.Animations.Base;
 using Mopups.Enums;
@@ -11,6 +9,9 @@ namespace Mopups.Pages;
 
 public partial class PopupPage : ContentPage
 {
+    /// <summary>
+    /// Executed when the popup's background is clicked.
+    /// </summary>
     public event EventHandler? BackgroundClicked;
 
     internal Task? AppearingTransactionTask { get; set; }
@@ -115,6 +116,7 @@ public partial class PopupPage : ContentPage
 
     public PopupPage()
     {
+        
         BackgroundColor = Colors.Transparent;//Color.FromArgb("#80000000");
     }
 
@@ -122,7 +124,6 @@ public partial class PopupPage : ContentPage
     {
         return false;
     }
-
     protected override void OnPropertyChanged(string? propertyName = null)
     {
         base.OnPropertyChanged(propertyName);
@@ -150,7 +151,6 @@ public partial class PopupPage : ContentPage
         {
             var systemPadding = SystemPadding;
             var systemPaddingSide = SystemPaddingSides;
-
             var left = 0d;
             var top = 0d;
             var right = 0d;
@@ -169,17 +169,18 @@ public partial class PopupPage : ContentPage
             y += top;
             width -= left + right;
 
-            height -= HasKeyboardOffset
-                ? top + Math.Max(bottom, KeyboardOffset)
-                : top + bottom;
+            if (HasKeyboardOffset)
+                height -= top + Math.Max(bottom, KeyboardOffset);
+            else
+                height -= top + bottom;
         }
         else if (HasKeyboardOffset)
         {
             height -= KeyboardOffset;
         }
-
         base.LayoutChildren(x, y, width, height);
     }
+
 
     #region Animation Methods
 
@@ -220,6 +221,7 @@ public partial class PopupPage : ContentPage
     }
 
     #endregion
+
 
     #region Override Animation Methods
 
@@ -262,17 +264,17 @@ public partial class PopupPage : ContentPage
     #endregion
 
     protected virtual bool OnBackgroundClicked()
-        => CloseWhenBackgroundIsClicked;
+    {
+        return CloseWhenBackgroundIsClicked;
+    }
 
     internal void SendBackgroundClick()
     {
         BackgroundClicked?.Invoke(this, EventArgs.Empty);
-
         if (BackgroundClickedCommand?.CanExecute(BackgroundClickedCommandParameter) == true)
         {
             BackgroundClickedCommand.Execute(BackgroundClickedCommandParameter);
         }
-
         if (OnBackgroundClicked())
         {
             MopupService.Instance.RemovePageAsync(this).SafeFireAndForget();

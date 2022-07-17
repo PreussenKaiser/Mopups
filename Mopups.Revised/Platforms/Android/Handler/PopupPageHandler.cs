@@ -16,6 +16,7 @@ public class PopupPageHandler : PageHandler
     protected override void ConnectHandler(ContentViewGroup platformView)
     {
         (platformView as PopupPageRenderer).PopupHandler = this;
+
         base.ConnectHandler(platformView);
     }
 
