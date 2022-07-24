@@ -15,9 +15,9 @@ In SampleMaui, you will see the general idea of how to get this up and running, 
 Platforms Supported (Current)
 - Android 
 - iOS
+- UWP
 
 Platforms Planned (Future)
-- UWP
 - MacOS
 
 Nice to have Platforms
