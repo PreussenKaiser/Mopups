@@ -40,6 +40,9 @@ public class PopupNavigation : IPopupNavigation
 #if IOS
             return new Mopups.iOS.Implementation.iOSMopups();
 #endif
+#if WINDOWS
+            return new Mopups.Windows.Implementation.WindowsMopups();
+#endif
 
             throw new PlatformNotSupportedException();
         }
