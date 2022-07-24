@@ -8,7 +8,7 @@ This is a rewrite of the older "Rg.Plugins.Popups" made by Rotorgames. There are
 
 --
 
-In SampleMaui, you will see the general idea of how to get this up and running, as well as the changes made. right now, i use CSharp pages, however, i do intend on making MVU, MVVM and whatever other coding paradigms i can find version of the same sample so people find it easier to use this. 
+In Mopups.Sample, you will see the general idea of how to get this up and running, as well as the changes made. right now, i use CSharp pages, however, i do intend on making MVU, MVVM and whatever other coding paradigms i can find version of the same sample so people find it easier to use this. 
 
 --
 
